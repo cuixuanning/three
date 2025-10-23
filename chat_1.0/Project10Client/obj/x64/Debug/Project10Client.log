@@ -1,0 +1,17 @@
+﻿  正在清理远程项目目录
+  正在验证源
+  正在将源远程复制到“192.168.177.129”
+  正在验证体系结构
+  正在验证体系结构
+D:\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Application Type\Linux\1.0\Linux.targets(202,5): warning : 当前项目体系结构“x64”不兼容远程系统体系结构“x86”(“x86”)。请在 Configuration Manager 中将项目体系结构切换为“x86”。如果正在交叉编译，可以忽略此警告。
+  正在启动远程生成
+  正在编译源:
+  Clientmain.cpp
+D:\vs2019Project\Project10Client\Clientmain.cpp(123,6): warning : unused variable ‘res’ [-Wunused-variable]
+D:\vs2019Project\Project10Client\Clientmain.cpp(123,6): warning :   int res = 0;
+D:\vs2019Project\Project10Client\Clientmain.cpp(123,6): warning :       ^
+D:\vs2019Project\Project10Client\Clientmain.cpp(124,7): warning : unused variable ‘buf’ [-Wunused-variable]
+D:\vs2019Project\Project10Client\Clientmain.cpp(124,7): warning :   char buf[100] = { 0 };
+D:\vs2019Project\Project10Client\Clientmain.cpp(124,7): warning :        ^
+  正在链接对象
+  Project10Client.vcxproj -> D:\vs2019Project\Project10Client\bin\x64\Debug\Project10Client.out
