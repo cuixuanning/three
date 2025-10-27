@@ -1,0 +1,57 @@
+#include "mainwindow.h"
+#include "ui_mainwindow.h"
+#include <QWidget>
+#include <string.h>
+#include "protocol.h"
+#include <QDebug>
+
+MainWindow::MainWindow(QWidget *parent) :
+    QMainWindow(parent),
+    ui(new Ui::MainWindow)
+{
+    ui->setupUi(this);
+
+    ui->textEdit->setFocusPolicy(QT::NoFocus);
+    ui->listWidget->setIconSize(Qsize(70,70));
+
+    this->wt = WriteThread::getInstance();
+    this->rt = ReadThread::getInstance();
+
+    memset(this->buf, 0, sizeof(this->buf));
+    connect(this->rt, SIGNAL(Send2UI(CHATMSG *)), this, SLOT(ShowInfo(CHATMSG*)));
+}
+
+MainWindow::~MainWindow()
+{
+    delete ui;
+}
+
+void MainWindow::serUserData(int username)
+{
+    this->username = username;
+}
+
+void MainWindow::on_pushButton_clicked()
+{
+    const char * arr = ui->listWidget->currentItem()->text().toStdString().c_str();
+    QString text = ui->textEdit_2->document()->toPlainText();
+    
+    msg.rcvid = atoi(arr);
+    qDebug()<<" Button_clicked msg.recipient = "<<msg.rcvid;
+    msg.sendid = this->username;
+    
+    qDebug()<<" Button_clicked msg.sender = "<<msg.sendid;
+    memcpy(msg.contenxt,text.toStdString().c_str(),sizeof(msg.contenxt));
+    qDebug()<<" Button_clicked msg.content = "<<msg.contenxt;
+    
+    this->head.businesstype = 2;
+    this->head.businesslen = sizeof(this->msg);
+    
+    memcpy(this->buf,&(this->head),sizeof(this->head));
+    memcpy(this->buf+sizeof(this->head),&(this->msg),sizeof(this->msg));
+    
+    this->wt->setData(this->buf,sizeof(this->head)+sizeof(this->msg));
+    
+    
+    
+}
